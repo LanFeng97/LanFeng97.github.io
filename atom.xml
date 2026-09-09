@@ -8,7 +8,200 @@
     <author>
       <name>轻沣</name>
     </author>
-    <updated>2026-08-31T15:10:01.000Z</updated>
+    <updated>2026-09-09T08:49:50.000Z</updated>
+    <entry>
+        <id>https://smartre97.github.io/2026/09/09/GAS%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%95%99%E7%A8%8B/</id>
+        <title>GAS快速上手教程</title>
+        <link rel="alternate" href="https://smartre97.github.io/2026/09/09/GAS%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%95%99%E7%A8%8B/"/>
+        <content type="html">&lt;h1 id=&#34;gas快速上手教程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#gas快速上手教程&#34;&gt;#&lt;/a&gt; GAS快速上手教程&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;适用读者：有蓝图经验、几乎没有C++经验，想用GAS(Gameplay Ability System)做出&amp;quot;能跑、能改、能加功能&amp;quot;的游戏系统。&lt;br /&gt;
+本文档会以你要做的这款游戏为贯穿示例：&lt;strong&gt;第三人称/第一人称可切换 + 近战 + 远程射击 + 简单解谜 + 基于Advanced Sessions与Steam的多人联机&lt;/strong&gt;。&lt;br /&gt;
+目标不是让你背原理，而是：&lt;strong&gt;照着做一定能做出来，想改一定有明确入口&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;0-这份文档能给你什么&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#0-这份文档能给你什么&#34;&gt;#&lt;/a&gt; 0. 这份文档能给你什么&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;一套&lt;strong&gt;复制粘贴即可编译&lt;/strong&gt;的C++骨架（角色基类、属性集、伤害函数库、动画通知），其余尽量用你熟悉的蓝图完成。&lt;/li&gt;
+&lt;li&gt;每个章节都有：&lt;strong&gt;目标 → 步骤 → 验证方法 → 修改入口 → 常见坑&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;一套&lt;strong&gt;低耦合&lt;/strong&gt;的组织思路：什么功能该进GAS、什么功能不该进GAS，以及为什么。&lt;/li&gt;
+&lt;li&gt;多人联机(Advanced Sessions + Steam)的配置与蓝图流程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;1-阅读路线按顺序别跳&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-阅读路线按顺序别跳&#34;&gt;#&lt;/a&gt; 1. 阅读路线（按顺序，别跳）&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;章节&lt;/th&gt;
+&lt;th&gt;内容&lt;/th&gt;
+&lt;th&gt;你需要花的时间&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;01&lt;/td&gt;
+&lt;td&gt;把项目变成C++项目、开启GAS&lt;/td&gt;
+&lt;td&gt;15分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;02&lt;/td&gt;
+&lt;td&gt;七个核心概念 + 整体架构（先看懂这张图）&lt;/td&gt;
+&lt;td&gt;20分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;03&lt;/td&gt;
+&lt;td&gt;角色基类：ASC + 属性集（全项目最核心的C++）&lt;/td&gt;
+&lt;td&gt;60分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;04&lt;/td&gt;
+&lt;td&gt;GameplayEffect：伤害/治疗 + 通用伤害函数库&lt;/td&gt;
+&lt;td&gt;40分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;05&lt;/td&gt;
+&lt;td&gt;第一个技能：近战攻击（蓝图为主）&lt;/td&gt;
+&lt;td&gt;60分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;06&lt;/td&gt;
+&lt;td&gt;远程射击与投射物&lt;/td&gt;
+&lt;td&gt;40分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;07&lt;/td&gt;
+&lt;td&gt;冷却、Buff与状态Tag&lt;/td&gt;
+&lt;td&gt;30分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;08&lt;/td&gt;
+&lt;td&gt;解谜与交互：哪些不该用GAS、怎么设计才低耦合&lt;/td&gt;
+&lt;td&gt;30分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;09&lt;/td&gt;
+&lt;td&gt;多人会话：Advanced Sessions + Steam&lt;/td&gt;
+&lt;td&gt;60分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;GAS联网要点与检查清单&lt;/td&gt;
+&lt;td&gt;30分钟&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;修改速查表（以后常回来翻）&lt;/td&gt;
+&lt;td&gt;用时即查&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;常见错误与排错手册&lt;/td&gt;
+&lt;td&gt;用时即查&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果你时间紧：03、05 是必读；04 是 05 的前置；其余按需。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;2-通用约定先读能省很多事&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-通用约定先读能省很多事&#34;&gt;#&lt;/a&gt; 2. 通用约定（先读，能省很多事）&lt;/h2&gt;
+&lt;h3 id=&#34;21-类名前缀&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21-类名前缀&#34;&gt;#&lt;/a&gt; 2.1 类名前缀&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;本文示例代码类名前缀是 &lt;strong&gt;&lt;code&gt;G&lt;/code&gt;&lt;/strong&gt;（如 &lt;code&gt;AGCharacterBase&lt;/code&gt;、&lt;code&gt;UGAttributeSet&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;如果你已有自己的项目前缀（例如你的项目缩写是&lt;code&gt;KB&lt;/code&gt;），把示例里的 &lt;code&gt;G&lt;/code&gt; 替换成你的前缀即可。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要&lt;/strong&gt;替换 &lt;code&gt;Gameplay&lt;/code&gt;、&lt;code&gt;AbilitySystem&lt;/code&gt;、&lt;code&gt;UAbilitySystemComponent&lt;/code&gt; 等引擎自带的词。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;22-文件放哪里&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#22-文件放哪里&#34;&gt;#&lt;/a&gt; 2.2 文件放哪里&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;所有自写C++文件都放进：&lt;code&gt;Source/&amp;lt;你的模块名&amp;gt;/GAS/&lt;/code&gt;（.h和.cpp放同一层，例如 &lt;code&gt;Source/KB5p8/GAS/GCharacterBase.h&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;模块名默认与项目名相同（打开 &lt;code&gt;.uproject&lt;/code&gt; 同级的 &lt;code&gt;Source&lt;/code&gt; 文件夹就能看到）。&lt;/li&gt;
+&lt;li&gt;蓝图资产建议建 &lt;code&gt;Content/&lt;/code&gt; 下的这些文件夹，命名前缀统一：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GA_&lt;/code&gt; = GameplayAbility技能蓝图&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GE_&lt;/code&gt; = GameplayEffect效果资产&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BP_&lt;/code&gt; = 普通蓝图（角色、投射物、谜题物）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;AM_&lt;/code&gt; = 动画蒙太奇&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IA_&lt;/code&gt; / &lt;code&gt;IMC_&lt;/code&gt; = Enhanced Input动作/映射&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;23-c你要改的地方-vs-不要碰的地方&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#23-c你要改的地方-vs-不要碰的地方&#34;&gt;#&lt;/a&gt; 2.3 C++你要改的地方 vs 不要碰的地方&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;文档里凡是标注 &lt;strong&gt;【改这里】&lt;/strong&gt; 的代码，就是给你改的（数值、属性名、配置）。&lt;/li&gt;
+&lt;li&gt;没标注的地方：先照抄。以后理解深了再动，不要&amp;quot;顺手优化&amp;quot;，否则报错时你无法判断是不是自己改坏的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;24-学习心法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#24-学习心法&#34;&gt;#&lt;/a&gt; 2.4 学习心法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;先跑通，再理解&lt;/strong&gt;：第一遍别改任何东西，把示例原样做出来，看到&amp;quot;血条会掉、技能会放&amp;quot;再回头读原理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;改一步，测一步&lt;/strong&gt;：每次只改一个点，用下面每章的&amp;quot;验证方法&amp;quot;确认没改坏。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;报错三件套&lt;/strong&gt;：遇到编译/运行错误，先看 Output Log 最上面一条红色 Error，把完整错误文字 + 你刚改过的代码发给我，我们一起改，不要自己瞎试。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;3-术语速查表先扫一眼用到了再回来看&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-术语速查表先扫一眼用到了再回来看&#34;&gt;#&lt;/a&gt; 3. 术语速查表（先扫一眼，用到了再回来看）&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;术语&lt;/th&gt;
+&lt;th&gt;一句话解释&lt;/th&gt;
+&lt;th&gt;你什么时候碰它&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ASC (AbilitySystemComponent)&lt;/td&gt;
+&lt;td&gt;每个角色的&amp;quot;GAS大脑&amp;quot;，管技能、属性、标签&lt;/td&gt;
+&lt;td&gt;03章创建；以后基本不用手碰&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AttributeSet&lt;/td&gt;
+&lt;td&gt;装属性的&amp;quot;属性包&amp;quot;（Health/Stamina...）&lt;/td&gt;
+&lt;td&gt;03、04章改属性时&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Attribute&lt;/td&gt;
+&lt;td&gt;一个具体数值，如Health&lt;/td&gt;
+&lt;td&gt;03、04章&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GE (GameplayEffect)&lt;/td&gt;
+&lt;td&gt;&amp;quot;效果&amp;quot;资产：改属性、上Buff、扣血、加冷却&lt;/td&gt;
+&lt;td&gt;04章起，大量用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GA (GameplayAbility)&lt;/td&gt;
+&lt;td&gt;&amp;quot;技能&amp;quot;蓝图：攻击、射击&lt;/td&gt;
+&lt;td&gt;05章起&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GameplayTag&lt;/td&gt;
+&lt;td&gt;带层级的小标签：&lt;code&gt;State.Dead&lt;/code&gt;、&lt;code&gt;Ability.Melee.Attack&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全程&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AbilityTask&lt;/td&gt;
+&lt;td&gt;技能蓝图里的&amp;quot;等待节点&amp;quot;（等动画、等事件）&lt;/td&gt;
+&lt;td&gt;05章&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SetByCaller&lt;/td&gt;
+&lt;td&gt;GE里一个&amp;quot;数值留空、由调用方填&amp;quot;的机制&lt;/td&gt;
+&lt;td&gt;04章（已被封装，你不用直接碰）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GameplayCue&lt;/td&gt;
+&lt;td&gt;纯表现反馈（音效/特效），本教程暂不深入&lt;/td&gt;
+&lt;td&gt;进阶&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;4-本文档与以后一起开发的关系&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4-本文档与以后一起开发的关系&#34;&gt;#&lt;/a&gt; 4. 本文档与&amp;quot;以后一起开发&amp;quot;的关系&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;本文档完成后，你就有了一个&lt;strong&gt;可运行、可改&lt;/strong&gt;的骨架与第一套技能。&lt;/li&gt;
+&lt;li&gt;之后你拿着这份文档找我开发具体功能（推箱子、火把谜题、悬崖悬挂、会话界面等）时，我会按 08/09 章里定好的&lt;strong&gt;边界与接口&lt;/strong&gt;继续做，不会推倒重来。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="UE" scheme="https://smartre97.github.io/categories/UE/" />
+        <category term="UE" scheme="https://smartre97.github.io/tags/UE/" />
+        <category term="GAS" scheme="https://smartre97.github.io/tags/GAS/" />
+        <updated>2026-09-09T08:49:50.000Z</updated>
+    </entry>
     <entry>
         <id>https://smartre97.github.io/2026/08/31/c++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</id>
         <title>c++面向对象基础</title>
@@ -23,6 +216,50 @@
 抽象：将一类对象的共同特征总结出来构造类的过程，包括数据抽象和行为抽象两方面。&lt;br /&gt;
 抽象只关注对象有哪些属性和行为，并不关注这些行为的细节是什么。&lt;/p&gt;
 &lt;p&gt;例如：动物基本上都需要吃，那么就有“吃”这个行为抽象，也有体重，那么就有“体重”这个数据抽象属性了。&lt;/p&gt;
+&lt;h1 id=&#34;cpp对c的增强&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cpp对c的增强&#34;&gt;#&lt;/a&gt; cpp对c的增强&lt;/h1&gt;
+&lt;h2 id=&#34;三目运算符的增强&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#三目运算符的增强&#34;&gt;#&lt;/a&gt; 三目运算符的增强&lt;/h2&gt;
+&lt;h2 id=&#34;const的增强&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#const的增强&#34;&gt;#&lt;/a&gt; const的增强&lt;/h2&gt;
+&lt;h2 id=&#34;枚举的增强&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#枚举的增强&#34;&gt;#&lt;/a&gt; 枚举的增强&lt;/h2&gt;
+&lt;h1 id=&#34;引用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#引用&#34;&gt;#&lt;/a&gt; 引用&lt;/h1&gt;
+&lt;h1 id=&#34;常量指针&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#常量指针&#34;&gt;#&lt;/a&gt; 常量指针&lt;/h1&gt;
+&lt;h1 id=&#34;指针引用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#指针引用&#34;&gt;#&lt;/a&gt; 指针引用&lt;/h1&gt;
+&lt;h1 id=&#34;const的引用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#const的引用&#34;&gt;#&lt;/a&gt; const的引用&lt;/h1&gt;
+&lt;h1 id=&#34;内联函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#内联函数&#34;&gt;#&lt;/a&gt; 内联函数&lt;/h1&gt;
+&lt;h1 id=&#34;函数重载&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#函数重载&#34;&gt;#&lt;/a&gt; 函数重载&lt;/h1&gt;
+&lt;h2 id=&#34;函数重载和函数指针&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#函数重载和函数指针&#34;&gt;#&lt;/a&gt; 函数重载和函数指针&lt;/h2&gt;
+&lt;h1 id=&#34;类&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#类&#34;&gt;#&lt;/a&gt; 类&lt;/h1&gt;
+&lt;h2 id=&#34;类的封装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#类的封装&#34;&gt;#&lt;/a&gt; 类的封装&lt;/h2&gt;
+&lt;h1 id=&#34;面向过程和面向对象&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#面向过程和面向对象&#34;&gt;#&lt;/a&gt; 面向过程和面向对象&lt;/h1&gt;
+&lt;h1 id=&#34;构造和析构函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#构造和析构函数&#34;&gt;#&lt;/a&gt; 构造和析构函数&lt;/h1&gt;
+&lt;h2 id=&#34;无参的构造和析构函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#无参的构造和析构函数&#34;&gt;#&lt;/a&gt; 无参的构造和析构函数&lt;/h2&gt;
+&lt;h1 id=&#34;拷贝构造函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#拷贝构造函数&#34;&gt;#&lt;/a&gt; 拷贝构造函数&lt;/h1&gt;
+&lt;h1 id=&#34;深拷贝和浅拷贝&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#深拷贝和浅拷贝&#34;&gt;#&lt;/a&gt; 深拷贝和浅拷贝&lt;/h1&gt;
+&lt;h1 id=&#34;构造函数初始化列表&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#构造函数初始化列表&#34;&gt;#&lt;/a&gt; 构造函数初始化列表&lt;/h1&gt;
+&lt;h1 id=&#34;new和delete&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#new和delete&#34;&gt;#&lt;/a&gt; new和delete&lt;/h1&gt;
+&lt;h1 id=&#34;static&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#static&#34;&gt;#&lt;/a&gt; static&lt;/h1&gt;
+&lt;h2 id=&#34;static的占用大小&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#static的占用大小&#34;&gt;#&lt;/a&gt; static的占用大小&lt;/h2&gt;
+&lt;h1 id=&#34;this指针&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#this指针&#34;&gt;#&lt;/a&gt; this指针&lt;/h1&gt;
+&lt;h1 id=&#34;友员函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#友员函数&#34;&gt;#&lt;/a&gt; 友员函数&lt;/h1&gt;
+&lt;h1 id=&#34;友员类和友员的关系&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#友员类和友员的关系&#34;&gt;#&lt;/a&gt; 友员类和友员的关系&lt;/h1&gt;
+&lt;h1 id=&#34;操作符重载&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#操作符重载&#34;&gt;#&lt;/a&gt; 操作符重载&lt;/h1&gt;
+&lt;h1 id=&#34;单目和双目运算符重载&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#单目和双目运算符重载&#34;&gt;#&lt;/a&gt; 单目和双目运算符重载&lt;/h1&gt;
+&lt;h1 id=&#34;左移右移操作符重载&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#左移右移操作符重载&#34;&gt;#&lt;/a&gt; 左移右移操作符重载&lt;/h1&gt;
+&lt;h1 id=&#34;自定义智能指针&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#自定义智能指针&#34;&gt;#&lt;/a&gt; 自定义智能指针&lt;/h1&gt;
+&lt;h1 id=&#34;自定义的string类&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#自定义的string类&#34;&gt;#&lt;/a&gt; 自定义的string类&lt;/h1&gt;
+&lt;h1 id=&#34;继承&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#继承&#34;&gt;#&lt;/a&gt; 继承&lt;/h1&gt;
+&lt;h2 id=&#34;类的继承&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#类的继承&#34;&gt;#&lt;/a&gt; 类的继承&lt;/h2&gt;
+&lt;h2 id=&#34;子类中的构造和析构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#子类中的构造和析构&#34;&gt;#&lt;/a&gt; 子类中的构造和析构&lt;/h2&gt;
+&lt;h2 id=&#34;子类和父类的重名变量&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#子类和父类的重名变量&#34;&gt;#&lt;/a&gt; 子类和父类的重名变量&lt;/h2&gt;
+&lt;h2 id=&#34;继承中的static&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#继承中的static&#34;&gt;#&lt;/a&gt; 继承中的static&lt;/h2&gt;
+&lt;h1 id=&#34;多继承与虚继承&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#多继承与虚继承&#34;&gt;#&lt;/a&gt; 多继承与虚继承&lt;/h1&gt;
+&lt;h1 id=&#34;多态&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#多态&#34;&gt;#&lt;/a&gt; 多态&lt;/h1&gt;
+&lt;h1 id=&#34;虚析构函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#虚析构函数&#34;&gt;#&lt;/a&gt; 虚析构函数&lt;/h1&gt;
+&lt;h1 id=&#34;重载重写重定义&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#重载重写重定义&#34;&gt;#&lt;/a&gt; 重载重写重定义&lt;/h1&gt;
+&lt;h1 id=&#34;多态的原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#多态的原理&#34;&gt;#&lt;/a&gt; 多态的原理&lt;/h1&gt;
+&lt;h1 id=&#34;纯虚函数和抽象&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#纯虚函数和抽象&#34;&gt;#&lt;/a&gt; 纯虚函数和抽象&lt;/h1&gt;
+&lt;h1 id=&#34;纯虚函数和多继承&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#纯虚函数和多继承&#34;&gt;#&lt;/a&gt; 纯虚函数和多继承&lt;/h1&gt;
+&lt;h1 id=&#34;数组指针&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#数组指针&#34;&gt;#&lt;/a&gt; 数组指针&lt;/h1&gt;
+&lt;h1 id=&#34;函数指针&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#函数指针&#34;&gt;#&lt;/a&gt; 函数指针&lt;/h1&gt;
 &lt;h1 id=&#34;类默认自带的函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#类默认自带的函数&#34;&gt;#&lt;/a&gt; 类默认自带的函数&lt;/h1&gt;
 &lt;p&gt;默认构造函数&lt;br /&gt;
 拷贝构造函数&lt;br /&gt;
@@ -30,7 +267,7 @@
 析构函数&lt;br /&gt;
 移动构造函数&lt;br /&gt;
 移动赋值运算符&lt;/p&gt;
-&lt;h1 id=&#34;static&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#static&#34;&gt;#&lt;/a&gt; static&lt;/h1&gt;
+&lt;h1 id=&#34;static-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#static-2&#34;&gt;#&lt;/a&gt; static&lt;/h1&gt;
 &lt;p&gt;关键字声明的变量是静态局部变量&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;初始化: 只在第一次调用函数时进行一次初始化。&lt;/li&gt;
@@ -118,9 +355,9 @@
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;        cout &lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x3C;&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x3C;&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; A&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt;GetK&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x3C;&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x3C;&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; endl&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; //通过匿名对象调用成员函数进行访问&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;        return&lt;/span&gt;&lt;span style=&#34;color:#2F798A;--shiki-dark:#4C9A91&#34;&gt; 0&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h1 id=&#34;重载重写重定义&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#重载重写重定义&#34;&gt;#&lt;/a&gt; 重载重写重定义&lt;/h1&gt;
+&lt;h1 id=&#34;重载重写重定义-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#重载重写重定义-2&#34;&gt;#&lt;/a&gt; 重载重写重定义&lt;/h1&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%87%8D%E5%AE%9A%E4%B9%89%E5%8C%BA%E5%88%AB.png&#34; alt=&#34;重载重写重定义&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;函数重载&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#函数重载&#34;&gt;#&lt;/a&gt; 函数重载&lt;/h1&gt;
+&lt;h1 id=&#34;函数重载-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#函数重载-2&#34;&gt;#&lt;/a&gt; 函数重载&lt;/h1&gt;
 &lt;p&gt;特点：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;函数名称必须相同&lt;/li&gt;
@@ -295,8 +532,8 @@ Shift+Capslock&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/139515439&#34;&gt;参考资料&lt;/a&gt;&lt;/p&gt;
 </content>
         <category term="c++" scheme="https://smartre97.github.io/categories/c/" />
-        <category term="c++11" scheme="https://smartre97.github.io/tags/c-11/" />
         <category term="c++" scheme="https://smartre97.github.io/tags/c/" />
+        <category term="c++11" scheme="https://smartre97.github.io/tags/c-11/" />
         <updated>2026-08-24T10:07:43.000Z</updated>
     </entry>
     <entry>
@@ -893,14 +1130,12 @@ OnRep函数只会在客户端执行。如果是服务器修改变量，则不会
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;    //定义OnRep_HP函数&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UFUNCTION&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;    void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; OnRep_HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; FGameplayAttributeData&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OldHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;# 常用前缀&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;常用前缀&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#常用前缀&#34;&gt;#&lt;/a&gt; 常用前缀&lt;/h1&gt;
 </content>
         <category term="UE" scheme="https://smartre97.github.io/categories/UE/" />
-        <category term="UE" scheme="https://smartre97.github.io/tags/UE/" />
         <category term="c++" scheme="https://smartre97.github.io/tags/c/" />
+        <category term="UE" scheme="https://smartre97.github.io/tags/UE/" />
         <updated>2026-08-19T07:19:50.000Z</updated>
     </entry>
     <entry>
@@ -963,10 +1198,11 @@ AI行为&lt;br /&gt;
 UI显示&lt;br /&gt;
 动画和音效&lt;br /&gt;
 &lt;a href=&#34;https://smartre97.github.io/2026/08/14/GameplayTag/&#34;&gt;跳转GameplayTag描述&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;添加c类&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#添加c类&#34;&gt;#&lt;/a&gt; 添加C++类&lt;/h2&gt;
+&lt;h2 id=&#34;attributeset&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#attributeset&#34;&gt;#&lt;/a&gt; AttributeSet&lt;/h2&gt;
+&lt;h3 id=&#34;添加c类&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#添加c类&#34;&gt;#&lt;/a&gt; 添加C++类&lt;/h3&gt;
 &lt;p&gt;添加如下c++类&lt;br /&gt;
 AttributeSet属性集  命名前缀为AS_。如用于角色的属性集可以为AS_Character。一般需要分别创建AS_Character、AS_NPC、AS_Vehicle（载具），用于给有属性的类使用。&lt;/p&gt;
-&lt;h2 id=&#34;变量&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#变量&#34;&gt;#&lt;/a&gt; 变量&lt;/h2&gt;
+&lt;h3 id=&#34;声明函数与变量&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#声明函数与变量&#34;&gt;#&lt;/a&gt; 声明函数与变量&lt;/h3&gt;
 &lt;p&gt;在属性集中定义变量，例如在继承自UAttributeSet的AS_Character中。由如下代码方式定义，可以通过UPERPERTY对其添加说明符。在定义后需要对变量使用ATTRIBUTE_AXCESSORS宏进行初始化&lt;/p&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; UCLASS&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; REFORGE_API&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; :&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; public&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; UAttributeSet&lt;/span&gt;&lt;/span&gt;
@@ -985,14 +1221,15 @@ AttributeSet属性集  命名前缀为AS_。如用于角色的属性集可以为
 &lt;li&gt;GAS 会广播OnAttributeChanged委托，C++/ 蓝图都可以绑定这个委托拿到属性变更，这才是GAS推荐监听属性变化的方式。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;在这里是按照本人学习的较老教程进行添加，实际GAS属性变化时其实不一定会触发OnRep&lt;/p&gt;
-&lt;h3 id=&#34;添加attribute_accessorsclassname-propertyname宏&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#添加attribute_accessorsclassname-propertyname宏&#34;&gt;#&lt;/a&gt; 添加ATTRIBUTE_ACCESSORS(ClassName, PropertyName)宏&lt;/h3&gt;
+&lt;h4 id=&#34;添加attribute_accessorsclassname-propertyname宏&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#添加attribute_accessorsclassname-propertyname宏&#34;&gt;#&lt;/a&gt; 添加ATTRIBUTE_ACCESSORS(ClassName, PropertyName)宏&lt;/h4&gt;
 &lt;p&gt;在继承自UAttributeSet的类中，添加如下宏&lt;/p&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;define&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; ATTRIBUTE_ACCESSORS&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt;ClassName&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GAMEPLAYATTRIBUTE_PROPERTY_GETTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;ClassName&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GAMEPLAYATTRIBUTE_VALUE_GETTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GAMEPLAYATTRIBUTE_VALUE_SETTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GAMEPLAYATTRIBUTE_VALUE_INITTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;该宏是一个访问器宏函数，宏名称为ATTRIBUTE_ACCESSORS，需要输入一个类名和一个属性名。&lt;br /&gt;
+&lt;p&gt;说明&lt;br /&gt;
+该宏是一个访问器宏函数，宏名称为ATTRIBUTE_ACCESSORS，需要输入一个类名和一个属性名。&lt;br /&gt;
 该宏会被替换为四个宏。四个宏定义如下&lt;/p&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;define&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; GAMEPLAYATTRIBUTE_PROPERTY_GETTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt;ClassName&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;	static&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; FGameplayAttribute Get&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt;##PropertyName##Attribute&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
@@ -1060,7 +1297,7 @@ AttributeSet属性集  命名前缀为AS_。如用于角色的属性集可以为
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;- ❌运行游戏过程中不要调用 InitXXX，只用于构造 / 初始化。&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;如果运行时调用 InitHealth，GE/Buff 会和这个数值发生错乱。&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;*/&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;对变量初始化&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对变量初始化&#34;&gt;#&lt;/a&gt; 对变量初始化&lt;/h3&gt;
+&lt;h4 id=&#34;对变量初始化&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对变量初始化&#34;&gt;#&lt;/a&gt; 对变量初始化&lt;/h4&gt;
 &lt;p&gt;在添加ATTRIBUTE_ACCESSORS(ClassName, PropertyName)宏后，调用并对变量进行初始化。&lt;/p&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; UCLASS&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; REFORGE_API&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; :&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; public&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; UAttributeSet&lt;/span&gt;&lt;/span&gt;
@@ -1069,9 +1306,112 @@ AttributeSet属性集  命名前缀为AS_。如用于角色的属性集可以为
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;	public&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UPROPERTY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;EditAnywhere&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;BlueprintReadWrite&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;Category&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;AS Character&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;ReplicatedUsing &lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; OnRep_HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	FGameplayAttributeData HP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;//由两个浮点值组成base value和current value。在#include &#34;AttributeSet.h&#34;中&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	ATTRIBUTE_ACCESSORS&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	ATTRIBUTE_ACCESSORS&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;//调用了刚刚创建的宏&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;添加onrep函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#添加onrep函数&#34;&gt;#&lt;/a&gt; 添加OnRep函数&lt;/h4&gt;
+&lt;p&gt;当变量添加了ReplicatedUsing属性后，会自动调用OnRep_XXX()函数。于是需要对这些函数进行定义&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;UCLASS&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; REFORGE_API&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; :&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; public&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; UAttributeSet&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	GENERATED_BODY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;	public&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UPROPERTY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;EditAnywhere&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;BlueprintReadWrite&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;Category&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;AS Character&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;ReplicatedUsing &lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; OnRep_HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	FGameplayAttributeData HP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	ATTRIBUTE_ACCESSORS&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UPROPERTY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;EditAnywhere&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;BlueprintReadWrite&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;Category&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;AS Character&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;ReplicatedUsing &lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; OnRep_MAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	FGameplayAttributeData MAXHP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	ATTRIBUTE_ACCESSORS&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;MAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	// 网络同步函数&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;	virtual&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; GetLifetimeReplicatedProps&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;TArray&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;&amp;#x3C;&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;FLifetimeProperty&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;&gt;&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OutLifetimeProps&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; const&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; override&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//virtual是定义虚函数，在ue蓝图中，可以在父类中写一个空函数（也可以非空）。而在其子类中，可以对那个该函数进行函数重载（重写），去进行具体实现，c++中就是使用override对父类的函数进行重载。&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//比如可以在父类中定义了“吃”这个行为的函数。但是具体的子类狗吃什么猫吃什么，也可以到具体的子类中由他们自己去重写实现。&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//const是常量函数，在ue中，const修饰的函数，默认作为纯函数暴露给蓝图，且不能被修改。&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//定义OnRep函数&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//定义OnRep_HP函数&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UFUNCTION&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;    void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; OnRep_HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; FGameplayAttributeData&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OldHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UFUNCTION&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;	void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; OnRep_MAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; FGameplayAttributeData&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OldMAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当前AS_Character.h文件如下&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;// Fill out your copyright notice in the Description page of Project Settings.&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;pragma&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; once&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;include&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;CoreMinimal.h&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;include&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;AttributeSet.h&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;include&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;AbilitySystemComponent.h&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;include&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;Net/UnrealNetwork.h&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;//网络相关.h文件&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;include&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;AS_Character.generated.h&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;define&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; ATTRIBUTE_ACCESSORS&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt;ClassName&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GAMEPLAYATTRIBUTE_PROPERTY_GETTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;ClassName&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GAMEPLAYATTRIBUTE_VALUE_GETTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GAMEPLAYATTRIBUTE_VALUE_SETTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GAMEPLAYATTRIBUTE_VALUE_INITTER&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;PropertyName&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; *&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; */&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;UCLASS&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; REFORGE_API&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; :&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; public&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; UAttributeSet&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	GENERATED_BODY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;	public&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UPROPERTY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;EditAnywhere&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;BlueprintReadWrite&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;Category&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;AS Character&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;ReplicatedUsing &lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; OnRep_HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	FGameplayAttributeData HP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	ATTRIBUTE_ACCESSORS&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UPROPERTY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;EditAnywhere&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;BlueprintReadWrite&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;Category&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;AS Character&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;ReplicatedUsing &lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; OnRep_MAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	FGameplayAttributeData MAXHP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	ATTRIBUTE_ACCESSORS&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;MAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	// 网络同步函数&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;	virtual&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; GetLifetimeReplicatedProps&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;TArray&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;&amp;#x3C;&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;FLifetimeProperty&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;&gt;&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OutLifetimeProps&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; const&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; override&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//定义OnRep函数&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//定义OnRep_HP函数&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UFUNCTION&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;    void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; OnRep_HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; FGameplayAttributeData&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OldHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;	&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	UFUNCTION&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;	void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; OnRep_MAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; FGameplayAttributeData&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OldMAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;实现函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实现函数&#34;&gt;#&lt;/a&gt; 实现函数&lt;/h3&gt;
+&lt;p&gt;来到AS_Character.cpp文件&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GetLifetimeReplicatedProps&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;TArray&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;&amp;#x3C;&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt;FLifetimeProperty&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;&gt;&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OutLifetimeProps&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; const&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;//void代表这里没有任何返回值。UAS_Character为来自类的名称。&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	Super&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;GetLifetimeReplicatedProps&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;OutLifetimeProps&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//Super是指调用父类的函数&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	DOREPLIFETIME_CONDITION_NOTIFY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; HP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; COND_OwnerOnly&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; REPNOTIFY_OnRep_HP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	DOREPLIFETIME_CONDITION_NOTIFY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; MAXHP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; COND_OwnerOnly&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; REPNOTIFY_OnRep_MAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;	//完成复制需要的属性&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;实现onrep函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实现onrep函数&#34;&gt;#&lt;/a&gt; 实现OnRep函数&lt;/h4&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;OnRep_HP&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; FGameplayAttributeData&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OldHP&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	GAMEPLAYATTRIBUTE_REPNOTIFY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; HP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; OldHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt; UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;OnRep_MAXHP&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#2E8F82;--shiki-dark:#5DA994&#34;&gt; FGameplayAttributeData&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x26;&lt;/span&gt;&lt;span style=&#34;color:#B07D48;--shiki-dark:#BD976A&#34;&gt; OldMAXHP&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;	GAMEPLAYATTRIBUTE_REPNOTIFY&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;UAS_Character&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; MAXHP&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; OldMAXHP&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;完成后可以按ctrl alt f11编译&lt;/p&gt;
 </content>
         <category term="UE" scheme="https://smartre97.github.io/categories/UE/" />
         <category term="UE" scheme="https://smartre97.github.io/tags/UE/" />
@@ -1171,8 +1511,8 @@ GAS 中几乎每个环节都由标签驱动：&lt;br /&gt;
 </content>
         <category term="UE" scheme="https://smartre97.github.io/categories/UE/" />
         <category term="UE" scheme="https://smartre97.github.io/tags/UE/" />
-        <category term="GameplayTag" scheme="https://smartre97.github.io/tags/GameplayTag/" />
         <category term="UE基础" scheme="https://smartre97.github.io/tags/UE%E5%9F%BA%E7%A1%80/" />
+        <category term="GameplayTag" scheme="https://smartre97.github.io/tags/GameplayTag/" />
         <updated>2026-08-14T08:01:55.000Z</updated>
     </entry>
     <entry>
@@ -1527,8 +1867,8 @@ int a = b+c, a 就是左值，其有变量名为a，通过&amp;amp;a可以左值
 &lt;p&gt;在写模版，例如工厂模式、智能指针内部、std::vector::emplace_black时，你不知道用户传进来的是左值还是右值，为保证效率不产生额外拷贝，必须使用完美转发将参数属性不变的传递给下一个函数&lt;/p&gt;
 </content>
         <category term="c++" scheme="https://smartre97.github.io/categories/c/" />
-        <category term="c++11" scheme="https://smartre97.github.io/tags/c-11/" />
         <category term="c++" scheme="https://smartre97.github.io/tags/c/" />
+        <category term="c++11" scheme="https://smartre97.github.io/tags/c-11/" />
         <updated>2026-08-14T07:59:42.000Z</updated>
     </entry>
     <entry>

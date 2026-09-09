@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"><meta name="renderer" content="webkit"><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="alternate" href="/rss.xml" title="轻沣的航海日志" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="轻沣的航海日志" type="application/atom+xml"><link rel="alternate" type="application/json" title="轻沣的航海日志" href="https://smartre97.github.io/feed.json"><link rel="preconnect" href="https://s4.zstatic.net"><link rel="preconnect" href="https://at.alicdn.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&amp;display=swap&amp;subset=latin,latin-ext" media="none" onload="this.media='all'"><link rel="modulepreload" href="/js/siteInit.js"><link rel="modulepreload" href="/js/nyx-player-5EU3IYCZ.js"><link rel="modulepreload" href="/js/copy-tex-IQN42IRT.js"><link rel="modulepreload" href="/js/post-NTOXYCIA.js"><link rel="modulepreload" href="/js/chunk-VHNIDU6B.js"><link rel="modulepreload" href="/js/chunk-5QOIMWLB.js"><link rel="stylesheet" href="/css/siteInit.css" media="none" onload="this.media='all'"><link rel="preload" href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200" as="image" fetchpriority="high"><link rel="preload" href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200" as="image" fetchpriority="high"><link rel="preload" href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200" as="image" fetchpriority="high"><link rel="preload" href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200" as="image" fetchpriority="high"><link rel="preload" href="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200" as="image" fetchpriority="high"><link rel="preload" href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200" as="image" fetchpriority="high"><meta name="keywords" content="UE,"><meta name="description" content="菜鸡的日常技术记录"><link rel="canonical" href="https://smartre97.github.io/2026/09/09/GAS%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%95%99%E7%A8%8B/"><link rel="stylesheet" href="/css/post.css?v=0.5.4"><link rel="stylesheet" href="/css/mermaid.css?v=0.5.4"><!-- 临时处理--><link rel="stylesheet" media="none" onload="this.media='all'" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css"><title>GAS快速上手教程</title><meta name="generator" content="Hexo 7.3.0"></head><body itemscope="" itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="pagefind_mount"></div><div id="container"><header id="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">GAS快速上手教程</h1><div class="meta"><span class="item" title="Created: 2026-09-09 16:49:50"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">Posted on</span><time itemprop="dateCreated datePublished" datetime="2026-09-09T16:49:50+08:00">2026-09-09</time></span><span class="item" title="Symbols count in article"><span class="icon"><i class="ic i-pen"></i></span><span class="text">Symbols count in article</span><span>2.5k</span><span class="text">words</span></span><span class="item" title="Reading time"><span class="icon"><i class="ic i-clock"></i></span><span class="text">Reading time</span><span>2 mins.</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="Toggle navigation bar"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">轻沣的航海日志</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&quot;);"></li><li class="item" style="background-image: url(&quot;https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&quot;);"></li><li class="item" style="background-image: url(&quot;https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&quot;);"></li><li class="item" style="background-image: url(&quot;https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&quot;);"></li><li class="item" style="background-image: url(&quot;https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&quot;);"></li><li class="item" style="background-image: url(&quot;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemlistelement="" itemscope="" itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">Home</a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/UE/" itemprop="item" rel="index" title="InUE"><span itemprop="name">UE<meta itemprop="position" content="0"></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" data-pagefind-body="data-pagefind-body" lang="zh-cn"><link itemprop="mainEntityOfPage" href="https://smartre97.github.io/2026/09/09/GAS%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%95%99%E7%A8%8B/"><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.png"><meta itemprop="name" content="轻沣"><meta itemprop="description" content="菜鸡就要多努力, 菜鸡的日常技术记录"></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="轻沣的航海日志"></span><div class="body md" itemprop="articleBody"><h1 id="gas快速上手教程"><a class="anchor" href="#gas快速上手教程">#</a> GAS快速上手教程</h1>
+<blockquote>
+<p>适用读者：有蓝图经验、几乎没有C++经验，想用GAS(Gameplay Ability System)做出"能跑、能改、能加功能"的游戏系统。<br>
+本文档会以你要做的这款游戏为贯穿示例：<strong>第三人称/第一人称可切换 + 近战 + 远程射击 + 简单解谜 + 基于Advanced Sessions与Steam的多人联机</strong>。<br>
+目标不是让你背原理，而是：<strong>照着做一定能做出来，想改一定有明确入口</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="0-这份文档能给你什么"><a class="anchor" href="#0-这份文档能给你什么">#</a> 0. 这份文档能给你什么</h2>
+<ul>
+<li>一套<strong>复制粘贴即可编译</strong>的C++骨架（角色基类、属性集、伤害函数库、动画通知），其余尽量用你熟悉的蓝图完成。</li>
+<li>每个章节都有：<strong>目标 → 步骤 → 验证方法 → 修改入口 → 常见坑</strong>。</li>
+<li>一套<strong>低耦合</strong>的组织思路：什么功能该进GAS、什么功能不该进GAS，以及为什么。</li>
+<li>多人联机(Advanced Sessions + Steam)的配置与蓝图流程。</li>
+</ul>
+<h2 id="1-阅读路线按顺序别跳"><a class="anchor" href="#1-阅读路线按顺序别跳">#</a> 1. 阅读路线（按顺序，别跳）</h2>
+<table>
+<thead>
+<tr>
+<th>章节</th>
+<th>内容</th>
+<th>你需要花的时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>把项目变成C++项目、开启GAS</td>
+<td>15分钟</td>
+</tr>
+<tr>
+<td>02</td>
+<td>七个核心概念 + 整体架构（先看懂这张图）</td>
+<td>20分钟</td>
+</tr>
+<tr>
+<td>03</td>
+<td>角色基类：ASC + 属性集（全项目最核心的C++）</td>
+<td>60分钟</td>
+</tr>
+<tr>
+<td>04</td>
+<td>GameplayEffect：伤害/治疗 + 通用伤害函数库</td>
+<td>40分钟</td>
+</tr>
+<tr>
+<td>05</td>
+<td>第一个技能：近战攻击（蓝图为主）</td>
+<td>60分钟</td>
+</tr>
+<tr>
+<td>06</td>
+<td>远程射击与投射物</td>
+<td>40分钟</td>
+</tr>
+<tr>
+<td>07</td>
+<td>冷却、Buff与状态Tag</td>
+<td>30分钟</td>
+</tr>
+<tr>
+<td>08</td>
+<td>解谜与交互：哪些不该用GAS、怎么设计才低耦合</td>
+<td>30分钟</td>
+</tr>
+<tr>
+<td>09</td>
+<td>多人会话：Advanced Sessions + Steam</td>
+<td>60分钟</td>
+</tr>
+<tr>
+<td>10</td>
+<td>GAS联网要点与检查清单</td>
+<td>30分钟</td>
+</tr>
+<tr>
+<td>11</td>
+<td>修改速查表（以后常回来翻）</td>
+<td>用时即查</td>
+</tr>
+<tr>
+<td>12</td>
+<td>常见错误与排错手册</td>
+<td>用时即查</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>如果你时间紧：03、05 是必读；04 是 05 的前置；其余按需。</p>
+</blockquote>
+<h2 id="2-通用约定先读能省很多事"><a class="anchor" href="#2-通用约定先读能省很多事">#</a> 2. 通用约定（先读，能省很多事）</h2>
+<h3 id="21-类名前缀"><a class="anchor" href="#21-类名前缀">#</a> 2.1 类名前缀</h3>
+<ul>
+<li>本文示例代码类名前缀是 <strong><code>G</code></strong>（如 <code>AGCharacterBase</code>、<code>UGAttributeSet</code>）。</li>
+<li>如果你已有自己的项目前缀（例如你的项目缩写是<code>KB</code>），把示例里的 <code>G</code> 替换成你的前缀即可。</li>
+<li><strong>不要</strong>替换 <code>Gameplay</code>、<code>AbilitySystem</code>、<code>UAbilitySystemComponent</code> 等引擎自带的词。</li>
+</ul>
+<h3 id="22-文件放哪里"><a class="anchor" href="#22-文件放哪里">#</a> 2.2 文件放哪里</h3>
+<ul>
+<li>所有自写C++文件都放进：<code>Source/&lt;你的模块名&gt;/GAS/</code>（.h和.cpp放同一层，例如 <code>Source/KB5p8/GAS/GCharacterBase.h</code>）。</li>
+<li>模块名默认与项目名相同（打开 <code>.uproject</code> 同级的 <code>Source</code> 文件夹就能看到）。</li>
+<li>蓝图资产建议建 <code>Content/</code> 下的这些文件夹，命名前缀统一：
+<ul>
+<li><code>GA_</code> = GameplayAbility技能蓝图</li>
+<li><code>GE_</code> = GameplayEffect效果资产</li>
+<li><code>BP_</code> = 普通蓝图（角色、投射物、谜题物）</li>
+<li><code>AM_</code> = 动画蒙太奇</li>
+<li><code>IA_</code> / <code>IMC_</code> = Enhanced Input动作/映射</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-c你要改的地方-vs-不要碰的地方"><a class="anchor" href="#23-c你要改的地方-vs-不要碰的地方">#</a> 2.3 C++你要改的地方 vs 不要碰的地方</h3>
+<ul>
+<li>文档里凡是标注 <strong>【改这里】</strong> 的代码，就是给你改的（数值、属性名、配置）。</li>
+<li>没标注的地方：先照抄。以后理解深了再动，不要"顺手优化"，否则报错时你无法判断是不是自己改坏的。</li>
+</ul>
+<h3 id="24-学习心法"><a class="anchor" href="#24-学习心法">#</a> 2.4 学习心法</h3>
+<ol>
+<li><strong>先跑通，再理解</strong>：第一遍别改任何东西，把示例原样做出来，看到"血条会掉、技能会放"再回头读原理。</li>
+<li><strong>改一步，测一步</strong>：每次只改一个点，用下面每章的"验证方法"确认没改坏。</li>
+<li><strong>报错三件套</strong>：遇到编译/运行错误，先看 Output Log 最上面一条红色 Error，把完整错误文字 + 你刚改过的代码发给我，我们一起改，不要自己瞎试。</li>
+</ol>
+<h2 id="3-术语速查表先扫一眼用到了再回来看"><a class="anchor" href="#3-术语速查表先扫一眼用到了再回来看">#</a> 3. 术语速查表（先扫一眼，用到了再回来看）</h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>一句话解释</th>
+<th>你什么时候碰它</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASC (AbilitySystemComponent)</td>
+<td>每个角色的"GAS大脑"，管技能、属性、标签</td>
+<td>03章创建；以后基本不用手碰</td>
+</tr>
+<tr>
+<td>AttributeSet</td>
+<td>装属性的"属性包"（Health/Stamina...）</td>
+<td>03、04章改属性时</td>
+</tr>
+<tr>
+<td>Attribute</td>
+<td>一个具体数值，如Health</td>
+<td>03、04章</td>
+</tr>
+<tr>
+<td>GE (GameplayEffect)</td>
+<td>"效果"资产：改属性、上Buff、扣血、加冷却</td>
+<td>04章起，大量用</td>
+</tr>
+<tr>
+<td>GA (GameplayAbility)</td>
+<td>"技能"蓝图：攻击、射击</td>
+<td>05章起</td>
+</tr>
+<tr>
+<td>GameplayTag</td>
+<td>带层级的小标签：<code>State.Dead</code>、<code>Ability.Melee.Attack</code></td>
+<td>全程</td>
+</tr>
+<tr>
+<td>AbilityTask</td>
+<td>技能蓝图里的"等待节点"（等动画、等事件）</td>
+<td>05章</td>
+</tr>
+<tr>
+<td>SetByCaller</td>
+<td>GE里一个"数值留空、由调用方填"的机制</td>
+<td>04章（已被封装，你不用直接碰）</td>
+</tr>
+<tr>
+<td>GameplayCue</td>
+<td>纯表现反馈（音效/特效），本教程暂不深入</td>
+<td>进阶</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-本文档与以后一起开发的关系"><a class="anchor" href="#4-本文档与以后一起开发的关系">#</a> 4. 本文档与"以后一起开发"的关系</h2>
+<ul>
+<li>本文档完成后，你就有了一个<strong>可运行、可改</strong>的骨架与第一套技能。</li>
+<li>之后你拿着这份文档找我开发具体功能（推箱子、火把谜题、悬崖悬挂、会话界面等）时，我会按 08/09 章里定好的<strong>边界与接口</strong>继续做，不会推倒重来。</li>
+</ul>
+<div class="tags"><a href="/tags/UE/" rel="tag"><i class="ic i-tag"></i>UE</a><a href="/tags/GAS/" rel="tag"><i class="ic i-tag"></i>GAS</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">Edited on </span><time title="Modified: 2026-09-09 16:57:57" itemprop="dateModified" datetime="2026-09-09T16:57:57+08:00">2026-09-09</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" src="/assets/wechatpay.avif" alt="轻沣 WeChat Pay"><p>WeChat Pay</p></div><div><img loading="lazy" src="/assets/alipay.avif" alt="轻沣 Alipay"><p>Alipay</p></div></div></div><div id="copyright"><ul><li class="author"><strong>Post author: </strong>轻沣<i class="ic i-at"><em>@</em></i>轻沣的航海日志</li><li class="link"><strong>Post link: </strong><a href="https://smartre97.github.io/2026/09/09/GAS%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%95%99%E7%A8%8B/" title="GAS快速上手教程">https://smartre97.github.io/2026/09/09/GAS快速上手教程/</a></li><li class="license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2026/08/31/c++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" rel="prev" itemprop="url" data-background-image="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200" title="c++面向对象基础"><span class="type">Previous Post</span><span class="category"><i class="ic i-flag"></i>c++</span><h3>c++面向对象基础</h3></a></div><div class="item right"></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="Contents"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#gas%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text"> GAS快速上手教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%BF%99%E4%BB%BD%E6%96%87%E6%A1%A3%E8%83%BD%E7%BB%99%E4%BD%A0%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text"> 0. 这份文档能给你什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%98%85%E8%AF%BB%E8%B7%AF%E7%BA%BF%E6%8C%89%E9%A1%BA%E5%BA%8F%E5%88%AB%E8%B7%B3"><span class="toc-number">1.2.</span> <span class="toc-text"> 1. 阅读路线（按顺序，别跳）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%80%9A%E7%94%A8%E7%BA%A6%E5%AE%9A%E5%85%88%E8%AF%BB%E8%83%BD%E7%9C%81%E5%BE%88%E5%A4%9A%E4%BA%8B"><span class="toc-number">1.3.</span> <span class="toc-text"> 2. 通用约定（先读，能省很多事）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E7%B1%BB%E5%90%8D%E5%89%8D%E7%BC%80"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 2.1 类名前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E6%96%87%E4%BB%B6%E6%94%BE%E5%93%AA%E9%87%8C"><span class="toc-number">1.3.2.</span> <span class="toc-text"> 2.2 文件放哪里</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-c%E4%BD%A0%E8%A6%81%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9-vs-%E4%B8%8D%E8%A6%81%E7%A2%B0%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-number">1.3.3.</span> <span class="toc-text"> 2.3 C++你要改的地方 vs 不要碰的地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-%E5%AD%A6%E4%B9%A0%E5%BF%83%E6%B3%95"><span class="toc-number">1.3.4.</span> <span class="toc-text"> 2.4 学习心法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9C%AF%E8%AF%AD%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%88%E6%89%AB%E4%B8%80%E7%9C%BC%E7%94%A8%E5%88%B0%E4%BA%86%E5%86%8D%E5%9B%9E%E6%9D%A5%E7%9C%8B"><span class="toc-number">1.4.</span> <span class="toc-text"> 3. 术语速查表（先扫一眼，用到了再回来看）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%AC%E6%96%87%E6%A1%A3%E4%B8%8E%E4%BB%A5%E5%90%8E%E4%B8%80%E8%B5%B7%E5%BC%80%E5%8F%91%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.5.</span> <span class="toc-text"> 4. 本文档与"以后一起开发"的关系</span></a></li></ol></li></ol></div><div class="related panel pjax" data-title="Related"><ul><li><a href="/2026/08/14/UnLua%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="bookmark" title="UnLua的使用">UnLua的使用</a></li><li><a href="/2026/08/14/UE-TraceHitResult/" rel="bookmark" title="UE TraceHitResult">UE TraceHitResult</a></li><li><a href="/2026/08/14/GameplayTag/" rel="bookmark" title="GameplayTag">GameplayTag</a></li><li><a href="/2026/08/14/GAS%E5%BF%AB%E9%80%9F%E5%BA%94%E7%94%A8/" rel="bookmark" title="GAS快速应用">GAS快速应用</a></li><li><a href="/2026/08/14/UE%E5%A4%9A%E4%BA%BA%E7%BD%91%E7%BB%9C%E4%B8%8B%E7%9A%84GamePlay%E6%A1%86%E6%9E%B6/" rel="bookmark" title="UE多人网络下的GamePlay框架">UE多人网络下的GamePlay框架</a></li><li><a href="/2026/08/19/U++%E5%9F%BA%E7%A1%80/" rel="bookmark" title="U++基础">U++基础</a></li><li><a href="/2026/08/27/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8Ecodex%E4%BD%BF%E7%94%A8/" rel="bookmark" title="虚幻引擎codex使用">虚幻引擎codex使用</a></li><li class="active"><a href="/2026/09/09/GAS%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%95%99%E7%A8%8B/" rel="bookmark" title="GAS快速上手教程">GAS快速上手教程</a></li></ul></div><div class="overview panel" data-title="Overview"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="轻沣" src="/assets/avatar.avif"><p class="name" itemprop="name">轻沣</p><div class="description" itemprop="description">菜鸡的日常技术记录</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">20</span><span class="name">posts</span></a></div><div class="item categories"><a href="/categories/"><span class="count">6</span><span class="name">categories</span></a></div><div class="item tags"><a href="/tags/"><span class="count">16</span><span class="name">tags</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/yourname" class="item github" title="https://github.com/yourname"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>Home</a></li><li class="item dropdown"><a href="#" onclick="return false;"><i class="ic i-user"></i>About</a><ul class="submenu"><li class="item"><a href="/admiration/" rel="section"><i class="ic i-coffee"></i>Appreciation</a></li></ul></li><li class="item dropdown"><a href="#" onclick="return false;"><i class="ic i-feather"></i>Posts</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>Tags</a></li></ul></li><li class="item"><a href="/friends/" rel="section"><i class="ic i-heart"></i>Friends</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2026/08/31/c++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div><div id="player"></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>Random Posts</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/c/" title="Inc++">c++</a></div><span><a href="/2026/08/14/Const%E7%9A%84%E5%A2%9E%E5%BC%BA/">Const的增强</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/c/" title="Inc++">c++</a></div><span><a href="/2026/08/24/c++11%E5%AF%BC%E8%AF%BB/">c++11导读</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/UE/" title="InUE">UE</a></div><span><a href="/2026/08/27/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8Ecodex%E4%BD%BF%E7%94%A8/">虚幻引擎codex使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%90%84%E5%9B%BD%E8%AF%AD%E8%A8%80/" title="In各国语言">各国语言</a></div><span><a href="/2026/08/24/%E6%97%A5%E8%AF%AD/">日语入门</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/c/" title="Inc++">c++</a></div><span><a href="/2026/08/21/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">Lambda表达式</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="In读书笔记">读书笔记</a></div><span><a href="/2026/08/24/%E5%AD%98%E5%9C%A8%E4%B8%8E%E6%97%B6%E9%97%B4/">存在与时间</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Hexo/" title="InHexo">Hexo</a></div><span><a href="/2026/08/13/Hexo%E5%AE%89%E8%A3%85%E4%B9%8B%E5%90%8E/">Hexo安装之后</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/c/" title="Inc++">c++</a></div><span><a href="/2026/08/14/DataAsset%E4%B8%8EDataTable/">DataAsset与DataTable</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/UE/" title="InUE">UE</a></div><span><a href="/2026/08/14/GAS%E5%BF%AB%E9%80%9F%E5%BA%94%E7%94%A8/">GAS快速应用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Hexo/" title="InHexo">Hexo</a></div><span><a href="/2026/08/25/%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%A7%88/">博客导览</a></span></li></ul></div><div class="rpost pjax"><h2>Recent Comments</h2></div></div><div class="status"><div class="copyright">© 2026 -<span itemprop="copyrightYear">2026</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">轻沣 @ 轻沣的航海日志</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="Symbols count total">49k words</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="Reading time total">45 mins.</span></div><div class="powered-by">Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> &amp; Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config="" type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `2026/09/09/GAS快速上手教程/`,
+    favicon: {
+        show: `(●´3｀●) Here we go again.`,
+        hide: `(´Д｀) It's a disaster!`
+    },
+    search: {
+        placeholder: "Search for Posts",
+        empty: "We didn't find any results for the search: ${query}",
+        stats: "${hits} results found in ${time} ms"
+    },
+    nocopy: "false",
+    copyright: `Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
+    quiz: {
+        choice: `Multiple Choice`,
+        multiple: `Multiple Answer`,
+        true_false: `True/False`,
+        essay: `Questions`,
+        gap_fill: `Gap Filling`,
+        mistake: `Wrong Answer`
+    }
+};
+</script><script src="/js/siteInit.js?v=0.5.4" type="module" fetchpriority="high" defer=""></script></body></html>
